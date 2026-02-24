@@ -30,11 +30,21 @@ class _HomeScreenState extends State<HomeScreen> {
           style: TextStyle(fontWeight: FontWeight.w700),
         ),
         actions: <Widget>[
-          IconButton(
+          FilledButton.icon(
             onPressed: () {},
-            icon: const Icon(Icons.notifications_none_rounded),
-            tooltip: 'Bildirimler',
+            icon: const Icon(Icons.dark_mode_rounded),
+            label: const Text('Acik/Koyu'),
+            style: FilledButton.styleFrom(
+              foregroundColor: Colors.white,
+              backgroundColor: colors.primary,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(14),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+              elevation: 0,
+            ),
           ),
+          const SizedBox(width: 12),
         ],
       ),
       drawer: const _AppDrawer(),
@@ -111,13 +121,13 @@ class _MainPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          'Hos geldiniz',
+                          'Hos Geldiniz',
                           style: theme.textTheme.labelLarge?.copyWith(
                             color: colors.onSurfaceVariant,
                           ),
                         ),
                         Text(
-                          'Bugun de hedeflerine bir adim daha yaklassin.',
+                          'Bugün de hedeflerinize bir adım daha yaklaşın',
                           style: theme.textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.w700,
                           ),
@@ -171,15 +181,6 @@ class _MainPage extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 12),
-            Align(
-              alignment: Alignment.centerRight,
-              child: FilledButton.icon(
-                onPressed: () {},
-                icon: const Icon(Icons.dark_mode_rounded),
-                label: const Text('Koyu Mod / Acik Mod'),
-              ),
-            ),
             const SizedBox(height: 18),
             Container(
               width: double.infinity,
@@ -207,8 +208,8 @@ class _MainPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Birden fazla dilde quiz cozumleriyle bilginizi test edin '
-                    've kelime dagarciginizi kalici bicimde gelistirin.',
+                    'Birden fazla dilde quizler ile bilginizi test edin '
+                    've kelime kapasitenizi kalıcı biçimde geliştirin.',
                     style: theme.textTheme.bodyMedium?.copyWith(
                       color: Colors.white.withValues(alpha: 0.86),
                       height: 1.4,
@@ -235,28 +236,96 @@ class _MainPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 18),
-            Row(
-              children: <Widget>[
-                Expanded(
-                  child: _InfoCard(
-                    icon: Icons.auto_awesome_rounded,
-                    title: 'Bugun Ogrenilen',
-                    value: '18 Kelime',
-                    color: colors.primary.withValues(alpha: 0.13),
-                    textColor: colors.primary,
-                  ),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: colors.surface,
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(
+                  color: colors.outlineVariant.withValues(alpha: 0.65),
                 ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: _InfoCard(
-                    icon: Icons.fact_check_rounded,
-                    title: 'Dogru Orani',
-                    value: '%84',
-                    color: colors.primary.withValues(alpha: 0.20),
-                    textColor: colors.primary,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'Aktif Unite',
+                    style: theme.textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
-                ),
-              ],
+                  const SizedBox(height: 6),
+                  Text(
+                    'Quiz ekraninda secilen dil burada gorunecek.',
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: colors.onSurfaceVariant,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 10,
+                    ),
+                    decoration: BoxDecoration(
+                      color: colors.primary.withValues(alpha: 0.10),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Row(
+                      children: <Widget>[
+                        Icon(Icons.menu_book_rounded, color: colors.primary),
+                        const SizedBox(width: 10),
+                        Text(
+                          'Secilen Dil: English',
+                          style: theme.textTheme.titleSmall?.copyWith(
+                            color: colors.primary,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 14),
+                  Text(
+                    'Bugun Calisilan Kelime',
+                    style: theme.textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    children: <Widget>[
+                      Expanded(
+                        child: _StatPill(
+                          title: 'Kelime',
+                          value: '24',
+                          color: colors.primary.withValues(alpha: 0.12),
+                          textColor: colors.primary,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: _StatPill(
+                          title: 'Dogru',
+                          value: '18',
+                          color: const Color(0xFF22C55E).withValues(alpha: 0.16),
+                          textColor: const Color(0xFF15803D),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: _StatPill(
+                          title: 'Yanlis',
+                          value: '6',
+                          color: const Color(0xFFEF4444).withValues(alpha: 0.16),
+                          textColor: const Color(0xFFB91C1C),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
             const SizedBox(height: 18),
             Container(
@@ -325,16 +394,14 @@ class _MainPage extends StatelessWidget {
   }
 }
 
-class _InfoCard extends StatelessWidget {
-  const _InfoCard({
-    required this.icon,
+class _StatPill extends StatelessWidget {
+  const _StatPill({
     required this.title,
     required this.value,
     required this.color,
     required this.textColor,
   });
 
-  final IconData icon;
   final String title;
   final String value;
   final Color color;
@@ -353,8 +420,6 @@ class _InfoCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Icon(icon, color: textColor),
-          const SizedBox(height: 10),
           Text(
             title,
             style: theme.textTheme.labelLarge?.copyWith(color: textColor),

@@ -26,10 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: colors.surface,
         elevation: 0,
         scrolledUnderElevation: 0,
-        title: const Text(
-          'QuickWord',
-          style: TextStyle(fontWeight: FontWeight.w700),
-        ),
         actions: <Widget>[
           FilledButton.icon(
             onPressed: () {},
@@ -50,31 +46,55 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       drawer: const AppDrawer(),
       body: _pages[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: colors.primary,
-        unselectedItemColor: colors.onSurfaceVariant,
-        backgroundColor: colors.surface,
-        onTap: (int index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-        },
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_rounded),
-            label: 'Ana Sayfa',
+      bottomNavigationBar: SafeArea(
+        minimum: const EdgeInsets.fromLTRB(12, 0, 12, 10),
+        child: Container(
+          decoration: BoxDecoration(
+            color: colors.surface,
+            borderRadius: BorderRadius.circular(20),
+            border: Border.all(color: colors.outlineVariant.withValues(alpha: 0.5)),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                color: colors.primary.withValues(alpha: 0.08),
+                blurRadius: 16,
+                offset: const Offset(0, 6),
+              ),
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.menu_book_rounded),
-            label: 'Quiz',
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: NavigationBar(
+              height: 68,
+              selectedIndex: _selectedIndex,
+              backgroundColor: colors.surface,
+              indicatorColor: colors.primary.withValues(alpha: 0.16),
+              labelBehavior:
+                  NavigationDestinationLabelBehavior.onlyShowSelected,
+              onDestinationSelected: (int index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
+              destinations: const <NavigationDestination>[
+                NavigationDestination(
+                  icon: Icon(Icons.home_rounded),
+                  selectedIcon: Icon(Icons.home_filled),
+                  label: 'Ana Sayfa',
+                ),
+                NavigationDestination(
+                  icon: Icon(Icons.menu_book_rounded),
+                  selectedIcon: Icon(Icons.menu_book),
+                  label: 'Quiz',
+                ),
+                NavigationDestination(
+                  icon: Icon(Icons.person_rounded),
+                  selectedIcon: Icon(Icons.person),
+                  label: 'Profil',
+                ),
+              ],
+            ),
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_rounded),
-            label: 'Profil',
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -94,52 +114,6 @@ class _MainPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: colors.primary.withValues(alpha: 0.08),
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: colors.primary.withValues(alpha: 0.14)),
-              ),
-              child: Row(
-                children: <Widget>[
-                  Container(
-                    height: 38,
-                    width: 38,
-                    decoration: BoxDecoration(
-                      color: colors.primaryContainer,
-                      borderRadius: BorderRadius.circular(14),
-                    ),
-                    child: Icon(
-                      Icons.waving_hand_rounded,
-                      color: colors.onPrimaryContainer,
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'Hos Geldiniz',
-                          style: theme.textTheme.labelLarge?.copyWith(
-                            color: colors.onSurfaceVariant,
-                          ),
-                        ),
-                        Text(
-                          'Bugün de hedeflerinize bir adım daha yaklaşın',
-                          style: theme.textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 10),
             Row(
               children: <Widget>[
                 Container(
@@ -207,6 +181,52 @@ class _MainPage extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+            const SizedBox(height: 10),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.fromLTRB(4, 10, 12, 10),
+              decoration: BoxDecoration(
+                color: Colors.grey.withValues(alpha: 0.12),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: Colors.grey.withValues(alpha: 0.28)),
+              ),
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    height: 38,
+                    width: 38,
+                    decoration: BoxDecoration(
+                      color: colors.primaryContainer,
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    child: Icon(
+                      Icons.waving_hand_rounded,
+                      color: colors.onPrimaryContainer,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          'Hos Geldiniz',
+                          style: theme.textTheme.labelLarge?.copyWith(
+                            color: colors.onSurfaceVariant,
+                          ),
+                        ),
+                        Text(
+                          'Bugün de hedeflerinize bir adım daha yaklaşın',
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
             const SizedBox(height: 12),
             Container(
@@ -365,10 +385,10 @@ class _MainPage extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: colors.surface,
+                color: Colors.grey.withValues(alpha: 0.12),
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
-                  color: colors.outlineVariant.withValues(alpha: 0.65),
+                  color: Colors.grey.withValues(alpha: 0.28),
                 ),
               ),
               child: Column(

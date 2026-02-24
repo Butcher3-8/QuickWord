@@ -65,15 +65,6 @@ class AppDrawer extends StatelessWidget {
             title: 'Yardim ve Destek',
             onTap: () => Navigator.pop(context),
           ),
-          const Spacer(),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 20),
-            child: FilledButton.tonalIcon(
-              onPressed: () => Navigator.pop(context),
-              icon: const Icon(Icons.logout_rounded),
-              label: const Text('Cikis Yap'),
-            ),
-          ),
         ],
       ),
     );

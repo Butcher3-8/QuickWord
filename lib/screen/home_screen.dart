@@ -381,7 +381,7 @@ class _MainPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    'Quizleri su an asagidaki dillerde cozebilirsiniz.',
+                    'Quizler aşağıdaki dillerde desteklenmektedir.',
                     style: theme.textTheme.bodyMedium?.copyWith(
                       color: colors.onSurfaceVariant,
                     ),
@@ -390,31 +390,26 @@ class _MainPage extends StatelessWidget {
                   const _LanguageItem(
                     flagPath: 'assets/flags/united-kingdom.png',
                     countryName: 'Birlesik Krallik',
-                    languageName: 'English',
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 7),
                   const _LanguageItem(
                     flagPath: 'assets/flags/germany.png',
                     countryName: 'Almanya',
-                    languageName: 'Deutsch',
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 7),
                   const _LanguageItem(
                     flagPath: 'assets/flags/france.png',
                     countryName: 'Fransa',
-                    languageName: 'Francais',
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 7),
                   const _LanguageItem(
                     flagPath: 'assets/flags/spain.png',
                     countryName: 'Ispanya',
-                    languageName: 'Espanol',
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 7),
                   const _LanguageItem(
                     flagPath: 'assets/flags/italia.png',
                     countryName: 'Italya',
-                    languageName: 'Italiano',
                   ),
                 ],
               ),
@@ -474,12 +469,10 @@ class _LanguageItem extends StatelessWidget {
   const _LanguageItem({
     required this.flagPath,
     required this.countryName,
-    required this.languageName,
   });
 
   final String flagPath;
   final String countryName;
-  final String languageName;
 
   @override
   Widget build(BuildContext context) {
@@ -510,12 +503,6 @@ class _LanguageItem extends StatelessWidget {
               style: theme.textTheme.titleSmall?.copyWith(
                 fontWeight: FontWeight.w600,
               ),
-            ),
-          ),
-          Text(
-            languageName,
-            style: theme.textTheme.labelLarge?.copyWith(
-              color: colors.onSurfaceVariant,
             ),
           ),
         ],

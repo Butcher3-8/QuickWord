@@ -18,10 +18,33 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colors = Theme.of(context).colorScheme;
+
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: colors.surface,
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        title: const Text(
+          'QuickWord',
+          style: TextStyle(fontWeight: FontWeight.w700),
+        ),
+        actions: <Widget>[
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.notifications_none_rounded),
+            tooltip: 'Bildirimler',
+          ),
+        ],
+      ),
+      drawer: const _AppDrawer(),
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: colors.primary,
+        unselectedItemColor: colors.onSurfaceVariant,
+        backgroundColor: colors.surface,
         onTap: (int index) {
           setState(() {
             _selectedIndex = index;
@@ -60,6 +83,52 @@ class _MainPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: colors.primary.withValues(alpha: 0.08),
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: colors.primary.withValues(alpha: 0.14)),
+              ),
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    height: 44,
+                    width: 44,
+                    decoration: BoxDecoration(
+                      color: colors.primaryContainer,
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    child: Icon(
+                      Icons.waving_hand_rounded,
+                      color: colors.onPrimaryContainer,
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          'Hos geldiniz',
+                          style: theme.textTheme.labelLarge?.copyWith(
+                            color: colors.onSurfaceVariant,
+                          ),
+                        ),
+                        Text(
+                          'Bugun de hedeflerine bir adim daha yaklassin.',
+                          style: theme.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
             Row(
               children: <Widget>[
                 Container(
@@ -120,8 +189,8 @@ class _MainPage extends StatelessWidget {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: <Color>[
-                    colors.primaryContainer,
-                    colors.secondaryContainer,
+                    colors.primary,
+                    const Color(0xFF3B82F6),
                   ],
                 ),
                 borderRadius: BorderRadius.circular(20),
@@ -132,7 +201,7 @@ class _MainPage extends StatelessWidget {
                   Text(
                     'Dil hedefinize keyifli bir yolculukla ulasin.',
                     style: theme.textTheme.titleMedium?.copyWith(
-                      color: colors.onPrimaryContainer,
+                      color: Colors.white,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -141,7 +210,7 @@ class _MainPage extends StatelessWidget {
                     'Birden fazla dilde quiz cozumleriyle bilginizi test edin '
                     've kelime dagarciginizi kalici bicimde gelistirin.',
                     style: theme.textTheme.bodyMedium?.copyWith(
-                      color: colors.onPrimaryContainer.withValues(alpha: 0.82),
+                      color: Colors.white.withValues(alpha: 0.86),
                       height: 1.4,
                     ),
                   ),
@@ -151,19 +220,15 @@ class _MainPage extends StatelessWidget {
                     child: LinearProgressIndicator(
                       value: 0.58,
                       minHeight: 7,
-                      backgroundColor: colors.onPrimaryContainer.withValues(
-                        alpha: 0.20,
-                      ),
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        colors.onPrimaryContainer,
-                      ),
+                      backgroundColor: Colors.white.withValues(alpha: 0.22),
+                      valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     'Gunluk hedef: 20 sorunun 12 tanesi tamamlandi',
                     style: theme.textTheme.labelLarge?.copyWith(
-                      color: colors.onPrimaryContainer,
+                      color: Colors.white,
                     ),
                   ),
                 ],
@@ -177,8 +242,8 @@ class _MainPage extends StatelessWidget {
                     icon: Icons.auto_awesome_rounded,
                     title: 'Bugun Ogrenilen',
                     value: '18 Kelime',
-                    color: colors.secondaryContainer,
-                    textColor: colors.onSecondaryContainer,
+                    color: colors.primary.withValues(alpha: 0.13),
+                    textColor: colors.primary,
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -187,8 +252,8 @@ class _MainPage extends StatelessWidget {
                     icon: Icons.fact_check_rounded,
                     title: 'Dogru Orani',
                     value: '%84',
-                    color: colors.tertiaryContainer,
-                    textColor: colors.onTertiaryContainer,
+                    color: colors.primary.withValues(alpha: 0.20),
+                    textColor: colors.primary,
                   ),
                 ),
               ],
@@ -198,8 +263,11 @@ class _MainPage extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: colors.surfaceContainerHighest.withValues(alpha: 0.65),
+                color: colors.surface,
                 borderRadius: BorderRadius.circular(16),
+                border: Border.all(
+                  color: colors.outlineVariant.withValues(alpha: 0.65),
+                ),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -355,6 +423,114 @@ class _LanguageItem extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _AppDrawer extends StatelessWidget {
+  const _AppDrawer();
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+    final ColorScheme colors = theme.colorScheme;
+
+    return Drawer(
+      child: Column(
+        children: <Widget>[
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.fromLTRB(20, 56, 20, 20),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: <Color>[
+                  colors.primary,
+                  const Color(0xFF3B82F6),
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                CircleAvatar(
+                  radius: 24,
+                  backgroundColor: Colors.white.withValues(alpha: 0.22),
+                  child: const Icon(Icons.person_rounded, color: Colors.white),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  'QuickWord Premium',
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  'Diller arasi quiz deneyimi',
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: Colors.white.withValues(alpha: 0.90),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          _DrawerTile(
+            icon: Icons.dashboard_rounded,
+            title: 'Panel',
+            onTap: () => Navigator.pop(context),
+          ),
+          _DrawerTile(
+            icon: Icons.workspace_premium_rounded,
+            title: 'Uyeliginiz',
+            onTap: () => Navigator.pop(context),
+          ),
+          _DrawerTile(
+            icon: Icons.help_outline_rounded,
+            title: 'Yardim ve Destek',
+            onTap: () => Navigator.pop(context),
+          ),
+          const Spacer(),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 20),
+            child: FilledButton.tonalIcon(
+              onPressed: () => Navigator.pop(context),
+              icon: const Icon(Icons.logout_rounded),
+              label: const Text('Cikis Yap'),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _DrawerTile extends StatelessWidget {
+  const _DrawerTile({
+    required this.icon,
+    required this.title,
+    required this.onTap,
+  });
+
+  final IconData icon;
+  final String title;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData theme = Theme.of(context);
+
+    return ListTile(
+      leading: Icon(icon),
+      title: Text(
+        title,
+        style: theme.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w600),
+      ),
+      onTap: onTap,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 2),
     );
   }
 }

@@ -89,13 +89,13 @@ class _MainPage extends StatelessWidget {
 
     return SafeArea(
       child: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.fromLTRB(14, 10, 14, 14),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: colors.primary.withValues(alpha: 0.08),
                 borderRadius: BorderRadius.circular(16),
@@ -104,8 +104,8 @@ class _MainPage extends StatelessWidget {
               child: Row(
                 children: <Widget>[
                   Container(
-                    height: 44,
-                    width: 44,
+                    height: 38,
+                    width: 38,
                     decoration: BoxDecoration(
                       color: colors.primaryContainer,
                       borderRadius: BorderRadius.circular(14),
@@ -115,7 +115,7 @@ class _MainPage extends StatelessWidget {
                       color: colors.onPrimaryContainer,
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  const SizedBox(width: 10),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -138,12 +138,12 @@ class _MainPage extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 10),
             Row(
               children: <Widget>[
                 Container(
-                  height: 44,
-                  width: 44,
+                  height: 38,
+                  width: 38,
                   decoration: BoxDecoration(
                     color: colors.primaryContainer,
                     borderRadius: BorderRadius.circular(14),
@@ -153,7 +153,7 @@ class _MainPage extends StatelessWidget {
                     color: colors.onPrimaryContainer,
                   ),
                 ),
-                const SizedBox(width: 12),
+                const SizedBox(width: 10),
                 Expanded(
                   child: Text(
                     'QuickWord',
@@ -165,26 +165,52 @@ class _MainPage extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 12,
-                    vertical: 8,
+                    vertical: 7,
                   ),
                   decoration: BoxDecoration(
-                    color: colors.tertiaryContainer,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Text(
-                    '7 Gun Seri',
-                    style: theme.textTheme.labelMedium?.copyWith(
-                      color: colors.onTertiaryContainer,
-                      fontWeight: FontWeight.w600,
+                    gradient: const LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: <Color>[
+                        Color(0xFFFF8A3D),
+                        Color(0xFFFF5F3D),
+                      ],
                     ),
+                    borderRadius: BorderRadius.circular(999),
+                    boxShadow: <BoxShadow>[
+                      BoxShadow(
+                        color: Color(0x33FF6B3D),
+                        blurRadius: 10,
+                        offset: Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const Icon(
+                        Icons.local_fire_department_rounded,
+                        size: 16,
+                        color: Colors.white,
+                      ),
+                      const SizedBox(width: 6),
+                      Text(
+                        '7 Gun Seri',
+                        style: theme.textTheme.labelLarge?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 0.2,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 18),
+            const SizedBox(height: 12),
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(18),
+              padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
@@ -200,7 +226,7 @@ class _MainPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'Dil hedefinize keyifli bir yolculukla ulasin.',
+                    'Dil hedefinize keyifli bir yolculukla ulaşın.',
                     style: theme.textTheme.titleMedium?.copyWith(
                       color: Colors.white,
                       fontWeight: FontWeight.w700,
@@ -215,7 +241,7 @@ class _MainPage extends StatelessWidget {
                       height: 1.4,
                     ),
                   ),
-                  const SizedBox(height: 14),
+                  const SizedBox(height: 10),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(999),
                     child: LinearProgressIndicator(
@@ -225,7 +251,7 @@ class _MainPage extends StatelessWidget {
                       valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 6),
                   Text(
                     'Gunluk hedef: 20 sorunun 12 tanesi tamamlandi',
                     style: theme.textTheme.labelLarge?.copyWith(
@@ -235,91 +261,97 @@ class _MainPage extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 18),
+            const SizedBox(height: 12),
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(14),
               decoration: BoxDecoration(
-                color: colors.surface,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                  color: colors.outlineVariant.withValues(alpha: 0.65),
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: <Color>[
+                    colors.primary,
+                    const Color(0xFF3B82F6),
+                  ],
                 ),
+                borderRadius: BorderRadius.circular(16),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    'Aktif Unite',
+                    'Aktif Dil',
                     style: theme.textTheme.titleMedium?.copyWith(
+                      color: Colors.white,
                       fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    'Quiz ekraninda secilen dil burada gorunecek.',
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: colors.onSurfaceVariant,
                     ),
                   ),
                   const SizedBox(height: 10),
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 10,
-                    ),
+                    padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: colors.primary.withValues(alpha: 0.10),
-                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.white.withValues(alpha: 0.18),
+                      borderRadius: BorderRadius.circular(14),
                     ),
                     child: Row(
                       children: <Widget>[
-                        Icon(Icons.menu_book_rounded, color: colors.primary),
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(6),
+                          child: Image.asset(
+                            'assets/flags/united-kingdom.png',
+                            width: 34,
+                            height: 24,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                         const SizedBox(width: 10),
-                        Text(
-                          'Secilen Dil: English',
-                          style: theme.textTheme.titleSmall?.copyWith(
-                            color: colors.primary,
-                            fontWeight: FontWeight.w700,
+                        Expanded(
+                          child: Text(
+                            'Birlesik Krallik',
+                            style: theme.textTheme.titleSmall?.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 14),
+                  const SizedBox(height: 10),
                   Text(
                     'Bugun Calisilan Kelime',
                     style: theme.textTheme.titleSmall?.copyWith(
+                      color: Colors.white,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 8),
                   Row(
                     children: <Widget>[
                       Expanded(
                         child: _StatPill(
                           title: 'Kelime',
                           value: '24',
-                          color: colors.primary.withValues(alpha: 0.12),
-                          textColor: colors.primary,
+                          color: Colors.white.withValues(alpha: 0.20),
+                          textColor: Colors.white,
                         ),
                       ),
-                      const SizedBox(width: 10),
+                      const SizedBox(width: 8),
                       Expanded(
                         child: _StatPill(
                           title: 'Dogru',
                           value: '18',
-                          color: const Color(0xFF22C55E).withValues(alpha: 0.16),
-                          textColor: const Color(0xFF15803D),
+                          color: Colors.white.withValues(alpha: 0.20),
+                          textColor: Colors.white,
                         ),
                       ),
-                      const SizedBox(width: 10),
+                      const SizedBox(width: 8),
                       Expanded(
                         child: _StatPill(
                           title: 'Yanlis',
                           value: '6',
-                          color: const Color(0xFFEF4444).withValues(alpha: 0.16),
-                          textColor: const Color(0xFFB91C1C),
+                          color: Colors.white.withValues(alpha: 0.20),
+                          textColor: Colors.white,
                         ),
                       ),
                     ],
@@ -327,7 +359,7 @@ class _MainPage extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 18),
+            const SizedBox(height: 12),
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(16),
